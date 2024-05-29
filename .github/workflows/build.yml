@@ -15,7 +15,8 @@ jobs:
     runs-on: ubuntu-22.04
 
     outputs:
-      FRIDA_VERSION: ${{ steps.pullFridaLatestRelease.outputs.FRIDA_VERSION }}
+      FRIDA_VERSION: '16.1.4'
+      # FRIDA_VERSION: ${{ steps.pullFridaLatestRelease.outputs.FRIDA_VERSION }}
       ALREADY_RELEASE: ${{ steps.checkReleaseVersion.outputs.ALREADY_RELEASE }}
     steps:
       - name: Pull Frida Latest Release
@@ -31,7 +32,7 @@ jobs:
             const {
               data: { tag_name: ver }
             } = releaseResponse;
-            core.setOutput('FRIDA_VERSION', ver);
+            core.setOutput('FRIDA_VERSION', '16.1.4');
 
       - name: Split Repository Name
         id: split_name
@@ -48,7 +49,8 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             try {
-              const releaseVersion = '${{ steps.pullFridaLatestRelease.outputs.FRIDA_VERSION }}'
+              # const releaseVersion = '${{ steps.pullFridaLatestRelease.outputs.FRIDA_VERSION }}'
+              const releaseVersion = '16.1.4'
               const releaseResponse = await github.repos.getReleaseByTag({
                 owner: '${{ steps.split_name.outputs.owner }}',
                 repo: '${{ steps.split_name.outputs.repo }}',
