@@ -23,15 +23,15 @@ jobs:
         id: pullFridaLatestRelease
         uses: actions/github-script@v3
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const releaseResponse = await github.repos.getLatestRelease({
-              owner: 'frida',
-              repo: 'frida',
-            })
-            const {
-              data: { tag_name: ver }
-            } = releaseResponse;
+            # const releaseResponse = await github.repos.getLatestRelease({
+            #   owner: 'frida',
+            #   repo: 'frida',
+            # })
+            # const {
+            #   data: { tag_name: ver }
+            # } = releaseResponse;
             core.setOutput('FRIDA_VERSION', '16.1.4');
 
       - name: Split Repository Name
@@ -46,11 +46,11 @@ jobs:
         id: checkReleaseVersion
         uses: actions/github-script@v3
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             try {
-              # const releaseVersion = '${{ steps.pullFridaLatestRelease.outputs.FRIDA_VERSION }}'
-              const releaseVersion = '16.1.4'
+              const releaseVersion = '${{ steps.pullFridaLatestRelease.outputs.FRIDA_VERSION }}'
+              # const releaseVersion = '16.1.4'
               const releaseResponse = await github.repos.getReleaseByTag({
                 owner: '${{ steps.split_name.outputs.owner }}',
                 repo: '${{ steps.split_name.outputs.repo }}',
